@@ -1,3 +1,4 @@
+#!.env/Script/ python
 import streamlit as st
 import asyncio, time
 import time
@@ -8,15 +9,16 @@ import Pages.NomeCurso as Nome
 import Pages.NadaSerMostrado as Nada
 import Pages.DownPDF as Down
 import Pages.CriarPDF as NewPDF
+import Pages.Avaliacao as Aval
 from playwright.async_api import async_playwright
 import pandas as pd
 
 st.set_page_config(
-    page_title='Moodlebot - Relatório - HomePage',
+    page_title='Moodlebot - Relatório de Avaliações do Curso - HomePage',
     page_icon=':earth_americas:',
     layout='wide'
 )
-st.title("Moodlebot - Relatórios")
+st.title("Moodlebot - Relatório de Avaliações do Curso")
 #st.subheader("Moodlebot - Relatórios")
 # def apply_style(linha):
 #     if (linha['message'] == 'Ok'):
@@ -111,6 +113,10 @@ async def HomePage():
                                         await page.goto(linha)#, wait_until="load") 
                                         pagina_carregada = True                   
                                         nome_curso = await Nome.NomeCurso(page)
+                                        print('Chamando pesquisa')
+                                        pesquisa_avaliacao_curso = await Aval.PesquisaAvaliacao(page, linha, cont_curso)
+                                        print('Passou pesquisa')
+                                        print(pesquisa_avaliacao_curso)
                                         #identificacao_participante, participante = IdentificacaoParticipante(page)
                                         #print(nada_encontrado)
                                         nada_encontrado = await Nada.NadaSerMostrado(page)
