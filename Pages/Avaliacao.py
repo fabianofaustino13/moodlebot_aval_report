@@ -8,8 +8,15 @@ async def PesquisaAvaliacao(page, linha, cont_curso):
         time.sleep(0.5)
         # Pesquisa pela Avaliação
         lista_avaliacao = []
-        avaliacao = await page.locator('xpath=//li[@class="activity questionnaire modtype_questionnaire "]')
-        print(len(avaliacao))
+        avaliacao = await page.locator('xpath=//li[@class="activity questionnaire modtype_questionnaire "]').count()
+        print(avaliacao)
+        x=0
+        for x in range(avaliacao):
+            print('teste')
+            await page[x].locator('xpath=//li[@class="activity questionnaire modtype_questionnaire "]').click()
+            print('teste2')
+
+
         
     except Exception as err:
         results+=  [f"Problema na Pesquisa de Avaliação. Na linha {cont_curso}: {linha}. Uma possível falha de conexão. Se possível, tente rodar novamente."]

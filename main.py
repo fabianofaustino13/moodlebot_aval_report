@@ -1,4 +1,3 @@
-#!.env/Script/ python
 import streamlit as st
 import asyncio, time
 import time
