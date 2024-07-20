@@ -1,11 +1,13 @@
 
 async def NomeCurso(page):
+#def NomeCurso(page):
     results = []    
     #return results
     pagina = page
     try:        
         #nome_curso = page.wait_for_selector('#page-header').query_selector('.page-header-headings').inner_text()
         nome_curso = await page.locator('#page-header').locator('.page-header-headings').inner_text()
+        #nome_curso = page.locator('#page-header').locator('.page-header-headings').inner_text()
         #nome_curso = await n_curso.inner_text()
         print(f"Nome do curso original: {nome_curso}")
         nome_curso = nome_curso.replace(':',' -')
