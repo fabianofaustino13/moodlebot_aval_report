@@ -3,9 +3,9 @@ timeout /t 2
 echo #######################
 echo Iniciando a Instalacao.
 echo #######################
-set minhaPasta=C:\moodlebot_user_report\
+set minhaPasta=C:\moodlebot_avaliacao_report\
 rem Arquivo txt que o processo vai ler com o nome dos arquivos.
-set meuArquivo=User_Report.bat
+set meuArquivo=Avaliacao_Report.bat
 echo ########################################
 echo Procurando pelo arquivo: %meuArquivo%
 echo ########################################
@@ -15,12 +15,12 @@ if not exist %meuArquivo% (
 	echo Instalando Python
 	echo ########################
 	timeout /t 2
-	C:\moodlebot_user_report\python-3.12.4-amd64.exe /quiet /passive InstallAllUsers=1 PrependPath=1 Include_test=0 InstallLauncherAllUsers=1 DefaultAllUsersTargetDir=C:\moodlebot_user_report\Python\ DefaultCustomTargetDir=C:\moodlebot_user_report\Python\
+	C:\moodlebot_user_report\python-3.12.4-amd64.exe /quiet /passive InstallAllUsers=1 PrependPath=1 Include_test=0 InstallLauncherAllUsers=1 DefaultAllUsersTargetDir=C:\moodlebot_avaliacao_report\Python\ DefaultCustomTargetDir=C:\moodlebot_avaliacao_report\Python\
 	echo ########################
 	echo Instalando a biblioteca.
 	echo ########################
 	timeout /t 2
-	C:\moodlebot_user_report\Python\Scripts\pip.exe install -r requirements.in
+	C:\moodlebot_avaliacao_report\Python\Scripts\pip.exe install -r requirements.in
 	echo ##################
 	echo Criando o arquivo.
 	echo ##################
