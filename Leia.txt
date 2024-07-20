@@ -1,11 +1,11 @@
-1 - O arquivo "moodlebot_report.zip" já está na estrutura de pasta organizada.
+1 - O arquivo "moodlebot_aval_report.zip" já está na estrutura de pasta organizada.
 2 - O .zip deverá ser extraído na Raiz do seu computador. Unidade C:
 3 - Instale o arquivo Python dentro da Pasta Python.
 4 - Execute o arquivo Install.bat
 4.1 - Se for a primeira vez, deverá aguardar a Instalação das bibliotecas.
-4.2 - Após a instalação da biblioteca, será criado um arquivo nesta mesma pasta com o nome: User_Report
-5 - Crie um ATALHO do arquivo User_Report em seu Desktop
-6 - Ao criar o atalho e clicar sobre ele, irá iniciar o Moodlebot_User_Report
+4.2 - Após a instalação da biblioteca, será criado um arquivo nesta mesma pasta com o nome: Avaliacao_Report
+5 - Crie um ATALHO do arquivo Avaliacao_Report em seu Desktop
+6 - Ao criar o atalho e clicar sobre ele, irá iniciar o Moodlebot_Avaliacao_Report
 7 - Ao executar a primeira vez, será necessário informar um e-mail.
 
 
