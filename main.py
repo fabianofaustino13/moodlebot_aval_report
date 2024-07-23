@@ -172,6 +172,9 @@ async def HomePage():
                     browser = await p.chromium.launch(headless=False, channel="chrome")
                     #browser = p.chromium.launch(headless=False, channel="chrome")
                     page = await browser.new_page()
+                    # AUMENTANDO A RESOLUÇÃO PARA 1920X1080 PARA ANTENDER AOS CURSOS NO FORMATO BOARD COM 25%
+                    await page.set_viewport_size({"width": 1920, "height": 1080})
+
                     #page = browser.new_page()
                     endereco_evg = 'https://www.escolavirtual.gov.br/login'
                     await page.goto(endereco_evg)
