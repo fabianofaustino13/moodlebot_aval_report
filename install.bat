@@ -1,18 +1,14 @@
 @echo off
 timeout /t 2
 echo ###################################################################################
-echo Iniciando a instalação e configuração no seu ambiente.
+echo Iniciando a instalacao e configuracao no seu ambiente.
 echo ###################################################################################
 set minhaPasta=C:\moodlebot_avaliacao_report\
 set pasta_atual=%cd%
 echo ###################################################################################
-echo Procurando pelo arquivo: %minhaPasta%
+echo Procurando pelo Pasta: %minhaPasta%
 echo ###################################################################################
 set meuArquivo=Relatorio_Oferta_Piloto.bat
-echo ###################################################################################
-set usuario=%username%
-echo %usuario%
-timeout /t 2
 IF not exist %minhaPasta% (
 	echo ###################################################################################
 	echo Criando a pasta de destino: C:\moodlebot_avaliacao_report\
@@ -21,12 +17,12 @@ IF not exist %minhaPasta% (
 	echo ###################################################################################
 	timeout /t 2
 	IF not exist %meuArquivo% (
-		echo Criando o arquivo.
+		echo Criando os arquivos.
 		echo ###################################################################################
 		echo streamlit run --client.showSidebarNavigation=False .\main.py >> Relatorio_Oferta_Piloto.bat		
 		echo ###################################################################################
 		echo Copiando os arquivos....
-		Xcopy /E %pasta_atual% %minhaPasta%	
+		Xcopy /E %pasta_atual% %minhaPasta% /y	
 		echo ###################################################################################
 		echo Instalando Python
 		echo ###################################################################################
@@ -40,13 +36,10 @@ IF not exist %minhaPasta% (
 		echo ###################################################################################
 		echo Copiando o Atalho: Relatorio_Oferta_Piloto.bat - Atalho.lnk para o seu Desktop
 		echo ###################################################################################
-		copy c:\moodlebot_avaliacao_report\Relatorio_Oferta_Piloto.bat - Atalho.lnk" "c:\Users\%usuario%\Desktop"	
+		Xcopy /H /C /I "c:\moodlebot_avaliacao_report\Relatorio_Oferta_Piloto.bat - Atalho.lnk" "c:\Users\%username%\Desktop" /y
 	)	
 ) else (
 	cd C:\moodlebot_avaliacao_report
-	timeout /t 5
-	echo %cd%
-	timeout /t 5
 	echo %meuArquivo%
 	IF not exist %meuArquivo% (
 		echo ###################################################################################
@@ -60,15 +53,15 @@ IF not exist %minhaPasta% (
 		timeout /t 2
 		C:\moodlebot_avaliacao_report\Python\Scripts\pip.exe install -r requirements.in
 		echo ###################################################################################
-		echo Criando o arquivo.
+		echo Criando os arquivos.
 		echo ###################################################################################
 		echo streamlit run --client.showSidebarNavigation=False .\main.py >> Relatorio_Oferta_Piloto.bat
 		echo Copiando o Atalho: Relatorio_Oferta_Piloto.bat - Atalho.lnk para o seu Desktop
 		echo ###################################################################################
-		copy c:\moodlebot_avaliacao_report\Relatorio_Oferta_Piloto.bat - Atalho.lnk" "c:\Users\%usuario%\Desktop"
+		Xcopy /H /C /I "c:\moodlebot_avaliacao_report\Relatorio_Oferta_Piloto.bat - Atalho.lnk" "c:\Users\%username%\Desktop" /y
 	)	
 )
 echo ###################################################################################
-echo Se necessário, crie um ATALHO do arquivo %meuArquivo% em seu Desktop.
+echo Se necessario, crie um ATALHO do arquivo %meuArquivo% em seu Desktop.
 echo ###################################################################################
 @pause
