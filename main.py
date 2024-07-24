@@ -252,6 +252,11 @@ async def HomePage():
                                         await page.goto(linha)
                                         pagina_carregada = True                   
                                         nome_curso = await Nome.NomeCurso(page)
+                                        #await page.locator('xpath=//input[@name="setmode"]').click()
+                                        await page.get_by_role("checkbox").set_checked(True)
+                                        #await page.goto(linha)#, wait_until="load")
+                                        time.sleep(1)
+                                        print('aqui')
                                         versao_ava = 41
                                         try:
                                             pesquisa_avaliacao_curso = await Aval.PesquisaAvaliacao(page, linha, cont_curso, versao_ava)
