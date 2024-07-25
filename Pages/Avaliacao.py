@@ -69,7 +69,7 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
                 #print(nome)
             
                 await page.locator('xpath=//div[@class="allresponses"]').locator('a:has-text("Ver todas as respostas")').click(timeout = 500000)
-                       
+                
     except Exception as err:
         results+=  [f"Problema na Avaliação de Satisfação. Na linha {cont_curso}: {linha}. Uma possível falha de conexão. Se possível, tente rodar novamente."]
         results+=  [f"Erro {err}, {type(err)=}."]

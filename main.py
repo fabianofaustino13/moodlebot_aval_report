@@ -5,6 +5,7 @@ import Pages.Pasta as PastaLocal
 import Pages.Logar as Logando
 import Pages.NomeCurso as Nome
 import Pages.DownPDFAvaliacao as DownAvaliacao
+import Pages.DownPagePDFAvaliacao as DownPageAvaliacao
 import Pages.DownPDFQuestionario as DownQuestionario
 import Pages.Questionario as Quest
 import Pages.Avaliacao as Aval
@@ -262,7 +263,8 @@ async def HomePage():
                                         except:
                                             print('goto 4.1')
                                             await page.goto(linha)
-                                        arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)                                      
+                                        #arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
+                                        arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
                                         results+= arquivo_down[0]
                                         #### Questionários #####
                                         await page.goto(linha)

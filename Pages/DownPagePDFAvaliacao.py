@@ -1,30 +1,30 @@
 from datetime import datetime
 import os, time
+import aspose.pdf as ap
+import pdfkit
 
-async def DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full): #linha, cont_curso):
+async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full): #linha, cont_curso):
 #def DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar): #linha, cont_curso):
     results = []   
     #print(page)
     #return results
+    config = pdfkit.configuration(wkhtmltopdf=r'C:\moodlebot_avaliacao_report\wkhtmltopdf.exe')
     try:        
         time.sleep(1)
         async with page.expect_download() as download_info:          
-            await page.get_by_alt_text("Baixar em formato PDF").click()
+            await page.get_by_alt_text("Baixar em formato PDF").click(timeout = 5000000)
         
         #download = await download_info.value
         download = await download_info.value
         print(f"URL para download: {download}")
-        #download = await download_info.value
         url_para_pesquisa = str(await download_info.value)
         url_pesquisa_instance = url_para_pesquisa.find('&instance=')
         url_pesquisa_group = url_para_pesquisa.find('&group=')
         id_instance = url_para_pesquisa[url_pesquisa_instance+10:url_pesquisa_group]
-        url_print = f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print'
-        await page.emulate_media(media='print')
         await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
-        await page.pdf(path='teste2.pdf')
-
-
+        url_print = f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print'
+        print(page)
+        pdfkit.from_url('https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance=5359&group=0&target=print', 'teste.pdf', configuration=config)
         #sugestao_nome = download_info.value.suggested_filename
         #nome_breve = await page.locator('xpath=//li[@class="breadcrumb-item"]').nth(2).inner_text()#locator('a:has-text("Ver todas as respostas")').get_attribute('href')
         #print(f'Nome breve: {nome_breve}')
