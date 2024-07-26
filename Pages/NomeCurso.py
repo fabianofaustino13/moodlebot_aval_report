@@ -18,22 +18,11 @@ async def NomeCurso(page, linha, versao_ava):
         nome_curso = await page.locator('#id_fullname').input_value()
         short_name_full = await page.locator('#id_shortname').input_value()
         print(f'Nome breve: {short_name_full}')
+        num_identificacao = await page.locator('#id_idnumber').input_value()
+        print(f'Número de identificacao do curso: {num_identificacao}')
         formato_curso = await page.locator('#id_courseformathdr').locator('#id_format').input_value()
-        print(f'Formato do Curso: {formato_curso}')
-        
-        #if (formato.input_value() != 'board') and (formato.input_value() != 'topics') and (formato.input_value() != 'topcoll') and (formato.input_value() != 'tiles') and (formato.input_value() != 'grid'): 
-            #pagina_carregada = True                   
-            #await page.locator('xpath=//input[@name="setmode"]').click()
-            #await page.get_by_role("checkbox").set_checked(True)
-        #    results+= ["Editar configurações do Curso 'Formato' deve ser: 'Formato Board, Tópicos, Tópicos Contraídos ou Tiles' atendendo ao Padrão."]
-
-        #await page.goto(linha)
-        #await page.goto(linha)#, wait_until="load")
-        #time.sleep(1)
-        #nome_curso = page.wait_for_selector('#page-header').query_selector('.page-header-headings').inner_text()
-        #nome_curso = await page.locator('#page-header').locator('.page-header-headings').inner_text()
-        #nome_curso = page.locator('#page-header').locator('.page-header-headings').inner_text()
-        #nome_curso = await n_curso.inner_text()
+        print(f'Formato do Curso: {formato_curso}')        
+       
         print(f"Nome do curso original: {nome_curso}")
         nome_curso = nome_curso.replace(':',' -')
         nome_curso = nome_curso.replace('?','')
@@ -44,4 +33,5 @@ async def NomeCurso(page, linha, versao_ava):
         results+=  [f"Erro {err}, {type(err)=}."]
         print(f"Erro {err}, {type(err)=}.")
 
-    return nome_curso, short_name_full, formato_curso
+    #RETORNA: NOME DO CURSO, NOME BREVE, NÚMERO DE IDENTIFICAÇÃO, FORMATO DO CURSO
+    return nome_curso, short_name_full, num_identificacao, formato_curso
