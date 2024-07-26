@@ -59,7 +59,8 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
                 #CLICAR NA ENQUETE
                 await page.locator(f'#{id_atividade}').locator('.instancename').click(timeout = 500000)
                 #CLICAR EM TODAS AS RESPOSTAS
-                await page.locator('xpath=//div[@class="allresponses"]').locator('a:has-text("Visualizar Todas as Respostas")').click(timeout = 500000)
+                #await page.locator('xpath=//div[@class="allresponses"]').locator('a:has-text("Visualizar Todas as Respostas")').click(timeout = 500000)
+                url_avaliacao = await page.locator('xpath=//div[@class="allresponses"]/a').get_attribute('href')
             else:
                 #nome_enquete = await page.locator(f'#{id_atividade}').locator('.activityname').inner_text()
                 #CLICAR NA ENQUETE
@@ -68,11 +69,11 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
                 nome = await page.locator('xpath=//div[@role="main"]').locator('.allresponses').inner_text()
                 #print(nome)
             
-                await page.locator('xpath=//div[@class="allresponses"]').locator('a:has-text("Ver todas as respostas")').click(timeout = 500000)
-                
+                #await page.locator('xpath=//div[@class="allresponses"]').locator('a:has-text("Ver todas as respostas")').click(timeout = 500000)
+                url_avaliacao = await page.locator('xpath=//div[@class="allresponses"]/a').get_attribute('href')
     except Exception as err:
         results+=  [f"Problema na Avaliação de Satisfação. Na linha {cont_curso}: {linha}. Uma possível falha de conexão. Se possível, tente rodar novamente."]
         results+=  [f"Erro {err}, {type(err)=}."]
         print(f"Erro {err}, {type(err)=}.")
 
-    return results
+    return results, url_avaliacao

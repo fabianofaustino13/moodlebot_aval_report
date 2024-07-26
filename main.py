@@ -198,7 +198,6 @@ async def HomePage():
                                 cont_curso+=1
                                 #print(cont_curso)
                                 soma_bar = (valor_progresso * 100) * cont_curso
-                                #print(soma_bar)
                                 my_bar.progress(int(soma_bar), text=progress_text)
                                 linha = str(nova_linha)
                                 linha = linha[1:].replace("'", "")
@@ -220,51 +219,67 @@ async def HomePage():
                                         #page.goto(url_38)#, wait_until="load")
                                         await page.goto(linha)#, wait_until="load")
                                         #PEGAR O NOME BREVE DO CURSO
-                                        pesquisa_id_curso = linha.find('?id=')
-                                        id_link_curso = linha[pesquisa_id_curso+4:]
-                                        await page.goto(f'https://mooc38.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
-                                        short_name_full = await page.locator('#id_shortname').input_value()
+                                        #pesquisa_id_curso = linha.find('?id=')
+                                        #id_link_curso = linha[pesquisa_id_curso+4:]
+                                        #await page.goto(f'https://mooc38.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
+                                        #short_name_full = await page.locator('#id_shortname').input_value()
                                         #print(short_name_full)
-                                        await page.goto(linha)
+                                        #await page.goto(linha)
                                         pagina_carregada = True
-                                        nome_curso = await Nome.NomeCurso(page)
+                                        #nome_curso = await Nome.NomeCurso(page)
                                         versao_ava = 38
+                                        retorno_nome_curso = await Nome.NomeCurso(page, linha, versao_ava)
+                                        nome_curso = retorno_nome_curso[0]
+                                        short_name_full = retorno_nome_curso[1]
+                                        formato_curso = retorno_nome_curso[2]
+                                        await page.goto(linha)
                                         pesquisa_avaliacao_curso = await Aval.PesquisaAvaliacao(page, linha, cont_curso, versao_ava)  
-                                        arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)                                      
+                                        results+= pesquisa_avaliacao_curso[0]
+                                        url_avaliacao = pesquisa_avaliacao_curso[1]
+                                        print(f'Valor url: {url_avaliacao}')
+                                        arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full, versao_ava, url_avaliacao)
+                                        #arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)                                      
                                         results+= arquivo_down[0]
                                         #### Questionários #####
-                                        await page.goto(linha)
                                         print('Retornando a página inicial do curso')
                                         pesquisa_questionario_curso = await Quest.Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, versao_ava, short_name_full)
                                         results+= pesquisa_questionario_curso         
 
                                     elif versao_ava_41 != -1:
                                         print("Ambiente Virtual de Aprendizagem 4.1")
-                                        url_41 = "https://mooc41.escolavirtual.gov.br/my/"                                        
+                                        url_41 = "https://mooc41.escolavirtual.gov.br/my/"  
+                                        versao_ava = 41                                      
                                         await page.goto(url_41)#, wait_until="load")    
                                         #page.goto(url_41)#, wait_until="load")    
                                         await page.goto(linha)#, wait_until="load") 
                                         #PEGAR O NOME BREVE DO CURSO
-                                        pesquisa_id_curso = linha.find('?id=')
-                                        id_link_curso = linha[pesquisa_id_curso+4:]
-                                        await page.goto(f'https://mooc41.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
-                                        short_name_full = await page.locator('#id_shortname').input_value()
-                                        print(short_name_full)
+                                        retorno_nome_curso = await Nome.NomeCurso(page, linha, versao_ava)
+                                        nome_curso = retorno_nome_curso[0]
+                                        short_name_full = retorno_nome_curso[1]
+                                        formato_curso = retorno_nome_curso[2]
                                         await page.goto(linha)
+                                        if formato_curso == 'tiles':
+                                            await page.get_by_role("checkbox").set_checked(True)
+                                            #await page.goto(linha)
+                                        #pesquisa_id_curso = linha.find('?id=')
+                                        #id_link_curso = linha[pesquisa_id_curso+4:]
+                                        #await page.goto(f'https://mooc41.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
+                                        #short_name_full = await page.locator('#id_shortname').input_value()
+                                        #print(short_name_full)
                                         pagina_carregada = True                   
-                                        nome_curso = await Nome.NomeCurso(page)
                                         #await page.locator('xpath=//input[@name="setmode"]').click()
-                                        await page.get_by_role("checkbox").set_checked(True)
                                         #await page.goto(linha)#, wait_until="load")
                                         time.sleep(1)
                                         versao_ava = 41
                                         try:
                                             pesquisa_avaliacao_curso = await Aval.PesquisaAvaliacao(page, linha, cont_curso, versao_ava)
+                                            results+= pesquisa_avaliacao_curso[0]
+                                            url_avaliacao = pesquisa_avaliacao_curso[1]
                                         except:
                                             print('goto 4.1')
                                             await page.goto(linha)
-                                        #arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
-                                        arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
+                                        arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full, versao_ava, url_avaliacao)
+                                        #arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
                                         results+= arquivo_down[0]
                                         #### Questionários #####
                                         await page.goto(linha)
@@ -316,6 +331,7 @@ async def HomePage():
                                             "message": "Ok",
                                             "status": True
                                         })
+                                
                             #await browser.close()                        
                             await browser.close()                        
                         
