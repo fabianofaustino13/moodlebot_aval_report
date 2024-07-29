@@ -258,6 +258,13 @@ async def HomePage():
                                         await page.goto(linha)#, wait_until="load") 
                                         #ENVIA: PAGE, LINHA DO ARQUIVO, VERSÃO DO AVA
                                         #RETORNA: NOME DO CURSO, NOME BREVE, NÚMERO DE IDENTIFICAÇÃO, FORMATO DO CURSO
+                                        #format_course = await page.query_selector_all('xpath=//body[@id="page-course-view-tiles"]')
+                                        #print(f'Cont formato: {len(format_course)}')
+                                        #if len(format_course) > 0: 
+                                        #    time.sleep(1)
+                                        #    await page.get_by_role("checkbox").set_checked(True)
+                                        #    time.sleep(1)
+                                        #    await page.goto(linha)
                                         retorno_nome_curso = await Nome.NomeCurso(page, linha, versao_ava)
                                         nome_curso = retorno_nome_curso[0]
                                         short_name_full = retorno_nome_curso[1]
@@ -273,7 +280,8 @@ async def HomePage():
                                         if pesquisa_termo_matriz_no_nome == -1 or pesquisa_termo_matriz_no_num_id == -1:
                                             if formato_curso == 'tiles':
                                                 await page.get_by_role("checkbox").set_checked(True)
-                                                
+                                                time.sleep(1)
+                                                await page.goto(linha)
                                             pagina_carregada = True
                                             time.sleep(1)
                                             try:

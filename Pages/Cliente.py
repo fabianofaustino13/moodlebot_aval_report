@@ -10,7 +10,7 @@ def LoginAVA():
 
     with form:
         dados = []
-        print('############ BEM VINDO AO MOODLEBOT - RELATÓRIO DE USUÁRIOS ############')
+        print('############ BEM VINDO AO MOODLEBOT - RELATÓRIO DE AVALIAÇÃO DO CURSO ############')
         print('Abra o navegador de sua preferência e execute um dos endereços apresentados acima "Local URL ou Network URL"')
         print('Entre com suas credenciais da Secretaria e selecione o arquivo txt com os dados necessários.')
         print('########################################################################')

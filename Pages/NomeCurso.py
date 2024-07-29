@@ -21,7 +21,7 @@ async def NomeCurso(page, linha, versao_ava):
         num_identificacao = await page.locator('#id_idnumber').input_value()
         print(f'Número de identificacao do curso: {num_identificacao}')
         formato_curso = await page.locator('#id_courseformathdr').locator('#id_format').input_value()
-        print(f'Formato do Curso: {formato_curso}')        
+        print(f'Formato do Curso: {formato_curso}')           
        
         print(f"Nome do curso original: {nome_curso}")
         nome_curso = nome_curso.replace(':',' -')
