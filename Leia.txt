@@ -1,12 +1,11 @@
 1 - O arquivo "moodlebot_aval_report.zip" já está na estrutura de pasta organizada.
-2 - O .zip deverá ser extraído na Raiz do seu computador. Unidade C:
-3 - Instale o arquivo Python dentro da Pasta Python.
-4 - Execute o arquivo Install.bat
-4.1 - Se for a primeira vez, deverá aguardar a Instalação das bibliotecas.
-4.2 - Após a instalação da biblioteca, será criado um arquivo nesta mesma pasta com o nome: Avaliacao_Report
-5 - Crie um ATALHO do arquivo Avaliacao_Report em seu Desktop
-6 - Ao criar o atalho e clicar sobre ele, irá iniciar o Moodlebot_Avaliacao_Report
-7 - Ao executar a primeira vez, será necessário informar um e-mail.
+2 - O .zip deverá ser extraído em seu computador.
+4 - Execute o arquivo Install.bat (Será criada a pasta: C:\moodlebot_avaliacao_report\)
+3.1 - Se for a primeira vez, deverá aguardar a Instalação das bibliotecas.
+3.2 - Após a instalação da biblioteca, será criado um arquivo nesta mesma pasta com o nome: Relatorio_Oferta_Piloto.bat
+4 - Crie um ATALHO do arquivo Relatorio_Oferta_Piloto.bat em seu Desktop, se necessário.
+5 - Ao criar o atalho e clicar sobre ele, irá iniciar o Relatorio_Oferta_Piloto
+6 - Ao executar a primeira vez, será necessário informar um e-mail.
 
 
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
@@ -14,5 +13,7 @@ Será aberta uma janela (prompt) no qual poderá acompanhar todas as informaçõ
 Ao abrir o navegador de forma automática, coloque as credenciais e as informações necessárias 
 para a extração dos dados.
 @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
+Deverá pegar os links dos cursos dos quais desejará extrarir os relatórios e salvar em um 
+arquivo .txt (bloco de notas).
 Para a extração dos dados, será necessário estar de posse do arquivo em TXT com as informações
-dos cursos (links dos relatórios).
+dos cursos (links dos cursos que deseja extrarir os relatórios).
