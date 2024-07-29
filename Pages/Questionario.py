@@ -33,6 +33,11 @@ async def Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, ver
         #print(f'Total de tiles: {len(formato_tiles)}')
         if len(formato_tiles) != 0:
             tiles = True
+        
+        f_tiles = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper quiz modtype_quiz dropready draggable"]')
+        #print(f'Tiles: {len(f_tiles)}')
+        if len(f_tiles) != 0:
+            cont = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper quiz modtype_quiz dropready draggable"]')
 
         #VERIFICAR SE O FORMATO DO CURSO É DO TIPO TOPICO - SE SIM, ENTRA ABAIXO E MARCA COMO VERDADEIRO
         topico = False

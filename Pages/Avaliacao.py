@@ -5,7 +5,7 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
     results = []    
     #return results
     try:        
-        print('Entrou pesquisa')
+        #print('Entrou pesquisa')
         #asyncio.sleep(0.5)
         time.sleep(0.5)
         # Pesquisa pela Avaliação
@@ -33,10 +33,10 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
         if len(formato_tiles) != 0:
             tiles = True
 
-        f_tiles = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper questionnaire modtype_questionnaire  "]')
-        print(f'Tiles: {len(f_tiles)}')
+        f_tiles = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper questionnaire modtype_questionnaire dropready draggable"]')
+        #print(f'Tiles: {len(f_tiles)}')
         if len(f_tiles) != 0:
-            cont = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper questionnaire modtype_questionnaire  "]')
+            cont = await page.query_selector_all('xpath=//li[@class="activity activity-wrapper questionnaire modtype_questionnaire dropready draggable"]')
         #VERIFICAR SE O FORMATO DO CURSO É DO TIPO TOPICO - SE SIM, ENTRA ABAIXO E MARCA COMO VERDADEIRO
         topico = False
         formato_topico = await page.query_selector_all('xpath=//ul[@class="topics"]')
@@ -51,7 +51,6 @@ async def PesquisaAvaliacao(page, linha, cont_curso, versao_ava):
             enquetes.append(await enq.get_attribute('id'))
             #enquetes.append(enq.get_attribute('id'))        
         
-        print('Aqui')
         x = 1
         for id_atividade in enquetes:   
             #TÓPICO CONTRAÍDO - ABRIR TUDO
