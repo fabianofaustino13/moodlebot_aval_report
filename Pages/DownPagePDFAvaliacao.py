@@ -19,20 +19,20 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
         url_pesquisa_instance = url_avaliacao.find('?instance=')
         url_pesquisa_group = url_avaliacao.find('&group=')
         id_instance = url_avaliacao[url_pesquisa_instance+10:url_pesquisa_group]  
-        short_name_full = short_name_full.replace(':',' -')
+        short_name_full = short_name_full.replace(':','-')
         short_name_full = short_name_full.replace('?','')
         short_name_full = short_name_full.replace('/','')
         short_name_full = short_name_full.replace('|','')
-        short_name_full = short_name_full.replace(' ','')
         short_name_full = short_name_full.strip()
         short_name_full = short_name_full.upper()
         data_hora_agora = datetime.now()
-        data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
+        #data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
+        data_hora = data_hora_agora.strftime(f'%d%H%M%S')
         pesquisa_turma = short_name_full.find('TURMA')
         if pesquisa_turma != -1:
-            #turma = short_name_full[pesquisa_turma:]
+            turma = short_name_full[pesquisa_turma:]
             #nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + turma + "-" + data_hora + ".pdf"
-            nome_arquivo = "Avaliação de Satisfação-" + short_name_full + "-" + data_hora + ".pdf"
+            nome_arquivo = "Avaliação de Satisfação-" + turma.upper() + "-" + data_hora + ".pdf"
         else:
             #nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + data_hora + ".pdf"
             nome_arquivo = "Avaliação de Satisfação-" + data_hora + ".pdf"
