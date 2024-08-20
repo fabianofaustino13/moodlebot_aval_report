@@ -22,15 +22,20 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
         short_name_full = short_name_full.replace(':',' -')
         short_name_full = short_name_full.replace('?','')
         short_name_full = short_name_full.replace('/','')
+        short_name_full = short_name_full.replace('|','')
+        short_name_full = short_name_full.replace(' ','')
+        short_name_full = short_name_full.strip()
         short_name_full = short_name_full.upper()
         data_hora_agora = datetime.now()
         data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
         pesquisa_turma = short_name_full.find('TURMA')
         if pesquisa_turma != -1:
-            turma = short_name_full[pesquisa_turma:]
-            nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + turma + "-" + data_hora + ".pdf"
+            #turma = short_name_full[pesquisa_turma:]
+            #nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + turma + "-" + data_hora + ".pdf"
+            nome_arquivo = "Avaliação de Satisfação-" + short_name_full + "-" + data_hora + ".pdf"
         else:
-            nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + data_hora + ".pdf"
+            #nome_arquivo = nome_curso + " - Avaliação de Satisfação - " + data_hora + ".pdf"
+            nome_arquivo = "Avaliação de Satisfação-" + data_hora + ".pdf"
      
         await page.emulate_media(media='print')
         if versao_ava == 38:

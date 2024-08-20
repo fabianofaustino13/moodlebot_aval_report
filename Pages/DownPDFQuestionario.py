@@ -37,6 +37,13 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
         nome_breve = sugestao_nome.replace('?','')
         nome_breve = sugestao_nome.replace('/','')
         nb_maiusculo = nome_breve.upper()
+        short_name_full = short_name_full.replace(':',' -')
+        short_name_full = short_name_full.replace('?','')
+        short_name_full = short_name_full.replace('/','')
+        short_name_full = short_name_full.replace('|','')
+        short_name_full = short_name_full.replace(' ','')
+        short_name_full = short_name_full.strip()
+        short_name_full = short_name_full.upper()
         data_hora_agora = datetime.now()
         data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
         pesquisa_turma = nb_maiusculo.find('TURMA')
@@ -45,11 +52,13 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
         if pesquisa_turma != -1:
             turma = nome_breve[pesquisa_turma:pesquisa_ponto_pdf]
             #print(turma)
-            nome_arquivo = nome_curso + " - " + turma + "-" + data_hora + ".pdf"
+            #nome_arquivo = nome_curso + " - " + turma + "-" + data_hora + ".pdf"
+            nome_arquivo = short_name_full + "-" + data_hora + ".pdf"
         else:
             turma = nome_breve[:pesquisa_ponto_pdf]
-            nome_arquivo = nome_curso + " - " + turma + " - " + data_hora + ".pdf"
-     
+            #nome_arquivo = nome_curso + " - " + turma + " - " + data_hora + ".pdf"
+            nome_arquivo = short_name_full + "-" + data_hora + ".pdf"
+
         print(f'Nome do arquivo: {nome_arquivo}')
         salvar_arquivo = os.path.join(endereco_salvar, nome_arquivo)
         #download_info.value.save_as(salvar_arquivo)
