@@ -5,9 +5,9 @@ async def Login(page, login_evg, senha_evg):
     login_sucesso = False
     try:
         await page.locator("#usrCpfEmail").fill(username)
-        await page.locator('xpath=//button[@class="btn btn-lg btn-primary btn-block"]').click()
+        await page.locator('xpath=//button[@class="btn btn-primary mb-3 w-100"]').click()
         await page.locator('#password').fill(password)
-        await page.locator('xpath=//button[@class="btn btn-lg btn-primary btn-block"]').click()
+        await page.locator('xpath=//button[@class="btn btn-primary mb-3 w-100"]').click()
         pagina_logado = str(page)
         procura_logado = pagina_logado.find('https://www.escolavirtual.gov.br/home')
         if procura_logado != -1:
