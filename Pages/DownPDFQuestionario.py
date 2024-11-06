@@ -8,6 +8,7 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
     #print(page)
     #return results
     time.sleep(1)
+    print('DownPDFQuestionario 1')
     try:        
         #SE NÃO FOR PDF, IRÁ ESCOLHER A OPÇÃO PDF    
         #print('Baixando o Questionário') 
@@ -20,11 +21,13 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
             #await page.locator('xpath=//div[@class="form-inline text-xs-right"]').locator('#downloadtype_download').nth(1).select_option(value="pdf")
             #page.locator('.custom-select urlselect').select_option(value='/mod/quiz/report.php?id=84410&mode=statistics')
             
-        #async with page.expect_download() as download_info:          
-        async with page.expect_download() as download_info:
+        #async with page.expect_download() as download_info:
+        time.sleep(1)        
+        async with page.expect_download() as download_info:        
             #await page.get_by_text("Download").click()
-            #await page.get_by_text("Download").click()
-            await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).get_by_text("Download").click(timeout=500000)
+            #await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).get_by_text("Download").click(timeout=500000)
+            await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('xpath=//button[@class="btn btn-secondary"]').click(timeout=500000)
+
         download = await download_info.value
         print(f"URL para download: {download}")
         #sugestao_nome = download_info.value.suggested_filename
