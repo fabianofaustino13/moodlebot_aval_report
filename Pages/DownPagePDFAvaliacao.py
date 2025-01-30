@@ -8,7 +8,7 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
     #print(page)
     #return results
     try:        
-        time.sleep(1)
+        time.sleep(1)    
         #async with page.expect_download() as download_info:          
         #    await page.get_by_alt_text("Baixar em formato PDF").click()
         
@@ -26,8 +26,8 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
         short_name_full = short_name_full.strip()
         short_name_full = short_name_full.upper()
         data_hora_agora = datetime.now()
-        #data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
-        data_hora = data_hora_agora.strftime(f'%d%H%M%S')
+        data_hora = data_hora_agora.strftime(f'%Y%m%d%H%M%S')
+        #data_hora = data_hora_agora.strftime(f'%d%H%M%S')
         pesquisa_turma = short_name_full.find('TURMA')
         if pesquisa_turma != -1:
             turma = short_name_full[pesquisa_turma:]
@@ -40,10 +40,10 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
         await page.emulate_media(media='print')
         if versao_ava == 38:
             print(f'Print PDF => https://mooc38.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
-            await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
+            await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
         else:
             print(f'Print PDF => https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
-            await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
+            await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
         time.sleep(0.5)
         salvar_arquivo = os.path.join(endereco_salvar, nome_arquivo)
         await page.pdf(path=salvar_arquivo)
@@ -54,7 +54,7 @@ async def DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco
         #results+=  [f"Erro {err}, {type(err)=}."]
         print(f"Erro ao baixar o arquivo da linha = {cont_curso}: {linha}")
         print(f"Erro {err}, {type(err)=}.")
-        await page.goto(linha)
+        await page.goto(linha)#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
     
     #print(f'Salvando em: {salvar_arquivo}')
     #print(f'Nome do arquivo: {nome_arquivo}')

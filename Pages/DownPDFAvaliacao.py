@@ -21,7 +21,7 @@ async def DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_sal
         id_instance = url_para_pesquisa[url_pesquisa_instance+10:url_pesquisa_group]
         url_print = f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print'
         await page.emulate_media(media='print')
-        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')
+        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/questionnaire/report.php?action=vall&instance={id_instance}&group=0&target=print')#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
         await page.pdf(path='teste2.pdf')
 
 
@@ -54,7 +54,7 @@ async def DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_sal
         #results+=  [f"Erro {err}, {type(err)=}."]
         print(f"Erro ao baixar o arquivo da linha = {cont_curso}: {linha}")
         print(f"Erro {err}, {type(err)=}.")
-        await page.goto(linha)
+        await page.goto(linha)#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
     
     #print(f'Salvando em: {salvar_arquivo}')
     #print(f'Nome do arquivo: {nome_arquivo}')

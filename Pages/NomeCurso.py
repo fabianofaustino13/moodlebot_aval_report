@@ -8,10 +8,10 @@ async def NomeCurso(page, linha, versao_ava):
         pesquisa_id_curso = linha.find('?id=')
         id_link_curso = linha[pesquisa_id_curso+4:]
         if versao_ava == 38:
-            await page.goto(f'https://mooc38.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
+            await page.goto(f'https://mooc38.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
             await page.locator('xpath=//a[@class="collapseexpand" and @role="button"]').click(timeout=300000)
         else:
-            await page.goto(f'https://mooc41.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')
+            await page.goto(f'https://mooc41.escolavirtual.gov.br/course/edit.php?id={id_link_curso}')#, timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA 
             await page.locator('xpath=//a[@class="btn btn-link p-1 collapseexpand collapsemenu collapsed" and @role="button"]').click(timeout=300000)
         
         time.sleep(0.5)

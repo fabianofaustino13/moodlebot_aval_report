@@ -172,10 +172,13 @@ async def HomePage():
                 #with async_playwright() as p:
                     browser = await p.chromium.launch(headless=False, channel="chrome")
                     #browser = p.chromium.launch(headless=False, channel="chrome")
-                    page = await browser.new_page()
+                    # create a new incognito browser context
+                    context = await browser.new_context()
+                    # create a new page inside context.
+                    page = await context.new_page()
+                    #page = await browser.new_page()
                     # AUMENTANDO A RESOLUÇÃO PARA 1920X1080 PARA ANTENDER AOS CURSOS NO FORMATO BOARD COM 25%
                     await page.set_viewport_size({"width": 1920, "height": 1080})
-
                     #page = browser.new_page()
                     endereco_evg = 'https://www.escolavirtual.gov.br/login'
                     await page.goto(endereco_evg)
@@ -252,7 +255,7 @@ async def HomePage():
                                     elif versao_ava_41 != -1:
                                         print("Ambiente Virtual de Aprendizagem 4.1")
                                         url_41 = "https://mooc41.escolavirtual.gov.br/my/"  
-                                        versao_ava = 41                                      
+                                        versao_ava = 41                                                                             
                                         await page.goto(url_41)#, wait_until="load")    
                                         #page.goto(url_41)#, wait_until="load")    
                                         await page.goto(linha)#, wait_until="load") 
@@ -283,11 +286,25 @@ async def HomePage():
                                             except:
                                                 print('goto 4.1')
                                                 await page.goto(linha)
-                                            arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full, versao_ava, url_avaliacao)
+                                           
+                                            # Save storage state into the file.
+                                            storage = await context.storage_state(path="state.json")
+                                            # Create a new context with the saved storage state.                                            
+                                            browser2 = await p.chromium.launch(headless=False, channel="chrome")
+                                            context2 = await browser2.new_context(storage_state="state.json")
+                                            # create a new page inside context.
+                                            page2 = await context2.new_page()
+                                            # AUMENTANDO A RESOLUÇÃO PARA 1920X1080 PARA ANTENDER AOS CURSOS NO FORMATO BOARD COM 25%
+                                            arquivo_down = await DownPageAvaliacao.DownloadPagePDFAvaliacao(page2, nome_curso, linha, cont_curso, endereco_salvar, short_name_full, versao_ava, url_avaliacao)
                                             #arquivo_down = await DownAvaliacao.DownloadPDFAvaliacao(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)
                                             results+= arquivo_down[0]
                                             nome_arquivo = arquivo_down[1]
                                             #### Questionários #####
+                                            await context2.close()
+                                            await browser2.close()                                            
+                                            print('Retornando a página inicial do curso')
+                                            await page.goto(url_41)#, wait_until="load")    
+                                            #page.goto(url_41)#, wait_until="load")    
                                             await page.goto(linha)
                                             print('Retornando a página inicial do curso')
                                             pesquisa_questionario_curso = await Quest.Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, versao_ava, short_name_full)
@@ -341,8 +358,7 @@ async def HomePage():
                                         })
                                 
                             #await browser.close()                        
-                            await browser.close()                        
-                        
+                            await context.close()                        
                         else:
                             st.error('Login ou senha inválido!')
                             print('Erro da senha')
