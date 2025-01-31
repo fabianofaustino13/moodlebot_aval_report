@@ -267,6 +267,7 @@ async def HomePage():
                                         short_name_full = retorno_nome_curso[1]
                                         num_indentificacao = retorno_nome_curso[2]
                                         formato_curso = retorno_nome_curso[3]
+                                        nome_breve_turma = retorno_nome_curso[4]
                                         await page.goto(linha)
                                         pesquisa_termo_matriz_no_nome = nome_curso.upper()
                                         pesquisa_termo_matriz_no_nome = pesquisa_termo_matriz_no_nome.find('MATRIZ')
@@ -274,9 +275,12 @@ async def HomePage():
                                         pesquisa_termo_matriz_no_num_id = pesquisa_termo_matriz_no_num_id.find('MATRIZ')
                                         if pesquisa_termo_matriz_no_nome == -1 or pesquisa_termo_matriz_no_num_id == -1:
                                             if formato_curso == 'tiles':
-                                                await page.get_by_role("checkbox").set_checked(True)
-                                                time.sleep(1)
-                                                await page.goto(linha)
+                                                try:
+                                                    await page.get_by_role("checkbox").set_checked(True)
+                                                    time.sleep(1)
+                                                    await page.goto(linha)
+                                                except:
+                                                    results+= [f"Curso no formato Tiles: O botão 'Modo de edição' não foi localizado."]
                                             pagina_carregada = True
                                             time.sleep(1)
                                             try:
@@ -349,10 +353,12 @@ async def HomePage():
                                         })
                                         results=[]
                                     else:
+                                        #nome_turma = nome_curso + ' - ' + nome_breve_turma
                                         resultados.append({
                                             #"check": str(f'O arquivo contém {total_linhas} link(s) e {total_linhas-linha_nao_baixada} foram baixada(s).'),
                                             #"check": str(f'Nome do Curso: {nome_curso}'),
-                                            "check": str(f'{nome_arquivo}'),
+                                            #"check": str(f'{nome_arquivo}'),
+                                            "check": str(f'{nome_curso} - {nome_breve_turma}'),
                                             "message": "Ok",
                                             "status": True
                                         })
