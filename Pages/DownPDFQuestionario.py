@@ -26,7 +26,7 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
         async with page.expect_download() as download_info:        
             #await page.get_by_text("Download").click()
             #await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).get_by_text("Download").click(timeout=500000)
-            await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('xpath=//button[@class="btn btn-secondary"]').click(timeout=500000)
+            await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('xpath=//button[@class="btn btn-secondary"]').click(timeout=600000)
 
         download = await download_info.value
         print(f"URL para download: {download}")
@@ -52,12 +52,12 @@ async def DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_
             turma = nome_breve[pesquisa_turma:pesquisa_ponto_pdf]
             #print(turma)
             #nome_arquivo = nome_curso + " - " + turma + "-" + data_hora + ".pdf"
-            nome_arquivo = turma.upper() + "-" + data_hora + ".pdf"
+            nome_arquivo = nome_curso.upper() + "_" + turma.upper() + "-" + data_hora + ".pdf"
             print(f'Nome1: {nome_arquivo}')
         else:
             turma = nome_breve[:pesquisa_ponto_pdf]
             #nome_arquivo = nome_curso + " - " + turma + " - " + data_hora + ".pdf"
-            nome_arquivo = turma.upper() + "-" + data_hora + ".pdf"
+            nome_arquivo = nome_curso.upper() + "_" + turma.upper() + "-" + data_hora + ".pdf"
             print(f'Nome2: {nome_arquivo}')
 
         print(f'Nome do arquivo: {nome_arquivo}')

@@ -80,7 +80,7 @@ async def Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, ver
                     #print(id_atividade[pesquisa_id_questionario+7:])
                     id_quest = id_atividade[pesquisa_id_questionario+7:]
                     try:
-                        await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/quiz/report.php?id={id_quest}&mode=statistics', timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA
+                        await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/quiz/report.php?id={id_quest}&mode=statistics', timeout=600000) # AGUARDAR ATÉ 10 MINUTOS PARA CARREGAR A PÁGINA
                         await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('#downloadtype_download').select_option(value='pdf')
                     except:
                         print('############################################################################')
@@ -88,7 +88,7 @@ async def Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, ver
                         print('############################################################################')
                         time.sleep(10)
                         await asyncio.sleep(3)
-                        await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/quiz/report.php?id={id_quest}&mode=statistics', timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA
+                        await page.goto(f'https://mooc38.escolavirtual.gov.br/mod/quiz/report.php?id={id_quest}&mode=statistics', timeout=600000) # AGUARDAR ATÉ 10 MINUTOS PARA CARREGAR A PÁGINA
                         await asyncio.sleep(3)
                         await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('#downloadtype_download').select_option(value='pdf')
                     arquivo_down = await DownQuestionario.DownloadPDFQuestionario(page, nome_curso, linha, cont_curso, endereco_salvar, short_name_full)#, linha, cont_curso)                                      
@@ -131,7 +131,7 @@ async def Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, ver
                     print(f'Baixando o Questionário de ID: {url[pesquisa_id_url+12:]}')
                     id_questionario = url[pesquisa_id_url+12:]
                     try:
-                        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/quiz/report.php?id={id_questionario}&mode=statistics', timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA
+                        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/quiz/report.php?id={id_questionario}&mode=statistics', timeout=600000) # AGUARDAR ATÉ 10 MINUTOS PARA CARREGAR A PÁGINA
                         await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('#downloadtype_download').select_option(value='pdf')
                     except:
                         print('############################################################################')
@@ -139,7 +139,7 @@ async def Questionario(page, nome_curso, linha, cont_curso, endereco_salvar, ver
                         print('############################################################################')
                         time.sleep(10)
                         await asyncio.sleep(3)
-                        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/quiz/report.php?id={id_questionario}&mode=statistics', timeout=300000) # AGUARDAR ATÉ 5 MINUTOS PARA CARREGAR A PÁGINA
+                        await page.goto(f'https://mooc41.escolavirtual.gov.br/mod/quiz/report.php?id={id_questionario}&mode=statistics', timeout=600000) # AGUARDAR ATÉ 10 MINUTOS PARA CARREGAR A PÁGINA
                         await asyncio.sleep(3)
                         await page.locator('xpath=//div[@class="form-inline text-xs-right"]').nth(0).locator('#downloadtype_download').select_option(value='pdf')
 
