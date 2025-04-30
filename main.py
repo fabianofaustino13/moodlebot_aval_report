@@ -225,17 +225,22 @@ async def HomePage():
                                         #ENVIA: PAGE, LINHA DO ARQUIVO, VERSÃO DO AVA
                                         #RETORNA: NOME DO CURSO, NOME BREVE, NÚMERO DE IDENTIFICAÇÃO, FORMATO DO CURSO
                                         retorno_nome_curso = await Nome.NomeCurso(page, linha, versao_ava)
+                                        print(retorno_nome_curso)
+                                        #nome_curso = retorno_nome_curso[0]
+                                        #short_name_full = retorno_nome_curso[1]
+                                        #num_indentificacao = retorno_nome_curso[2]
+                                        #formato_curso = retorno_nome_curso[3]
+
                                         nome_curso = retorno_nome_curso[0]
                                         short_name_full = retorno_nome_curso[1]
                                         num_indentificacao = retorno_nome_curso[2]
                                         formato_curso = retorno_nome_curso[3]
+                                        nome_breve_turma = retorno_nome_curso[4]
                                         await page.goto(linha)
-                                        pesquisa_termo_matriz_no_nome = nome_curso.upper(nome_curso.find('MATRIZ'))
+                                        pesquisa_termo_matriz_no_nome = nome_curso.upper()
                                         pesquisa_termo_matriz_no_nome = pesquisa_termo_matriz_no_nome.find('MATRIZ')
-                                        print(f'Teste aqui: {pesquisa_termo_matriz_no_nome}')
                                         pesquisa_termo_matriz_no_num_id = num_indentificacao.upper()
                                         pesquisa_termo_matriz_no_num_id = pesquisa_termo_matriz_no_num_id.find('MATRIZ')
-                                        print(f'Teste aqui2: {pesquisa_termo_matriz_no_num_id}')
                                         if pesquisa_termo_matriz_no_nome == -1 or pesquisa_termo_matriz_no_num_id == -1:
                                             pesquisa_avaliacao_curso = await Aval.PesquisaAvaliacao(page, linha, cont_curso, versao_ava)  
                                             results+= pesquisa_avaliacao_curso[0]
